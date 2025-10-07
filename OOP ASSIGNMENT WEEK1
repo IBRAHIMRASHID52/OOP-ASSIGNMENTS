@@ -1,0 +1,35 @@
+public class Student {
+    
+    String name;
+    float midterm;
+    float finalExam;
+
+    
+    float CalculateScore() {
+        float total;
+        total = (midterm * 0.4f) + (finalExam * 0.6f);
+        return total;
+    }
+
+    
+    void ShowStudentInfoAndScore() {
+        System.out.println("Student Name: " + name);
+        System.out.println("Midterm Score: " + midterm + "%");
+        System.out.println("Final Exam Score: " + finalExam + "%");
+        System.out.println("Total Score: " + CalculateScore() + "%");
+    }
+
+    
+    public static void main(String[] args) {
+        
+        Student student1 = new Student();
+
+        
+        student1.name = "Ibrahimrashid";
+        student1.midterm = 80;
+        student1.finalExam = 90;
+
+        
+        student1.ShowStudentInfoAndScore();
+    }
+}
