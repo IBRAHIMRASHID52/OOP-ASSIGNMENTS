@@ -1,0 +1,107 @@
+class Account {
+    
+    private double balance;
+    private String ownerName;
+    private int failedAttempts;
+    private double transferredAmount;
+
+    
+    public Account(String name, double balance) {
+        this.ownerName = name;
+        this.balance = balance;
+        this.failedAttempts = 0;
+        this.transferredAmount = 0;
+    }
+
+    
+    public void add(double amount) {
+        balance += amount;
+        System.out.println(amount + " added. New balance: " + balance);
+    }
+
+    
+    public void withdraw(double amount) {
+        Scanner input = new Scanner(System.in);
+        int password = 1234; // fixed password
+        boolean success = false;
+
+        System.out.println("Please enter the 4-digit pass:");
+        for (int i = 0; i < 3; i++) {
+            int enteredPass = input.nextInt();
+
+            if (enteredPass == password) {
+                success = true;
+                break;
+            } else {
+                failedAttempts++;
+                if (i < 2)
+                    System.out.println("Wrong password! Try again:");
+            }
+        }
+
+        if (success) {
+            if (balance >= amount) {
+                balance -= amount;
+                System.out.println("Withdrawal successful! Remaining balance: " + balance);
+            } else {
+                System.out.println("Insufficient balance!");
+            }
+        } else {
+            System.out.println("Your account has been blocked, please try again later.");
+        }
+    }
+
+    
+    public double getBalance() {
+        return balance;
+    }
+
+    
+    public void setOwnerName(String name) {
+        this.ownerName = name;
+    }
+
+    
+    public void transfer(Account to, double amount) {
+        if (balance >= amount) {
+            balance -= amount;
+            to.add(amount);
+            transferredAmount = amount;
+            System.out.println("Transferred " + amount + " to " + to.ownerName);
+        } else {
+            System.out.println("Transfer failed! No sufficient balance.");
+        }
+    }
+
+    
+    public double getTransferredAmount() {
+        return transferredAmount;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        
+        Account acc1 = new Account("Ibrahim", 500.0);
+        Account acc2 = new Account("Rashid", 200.0);
+
+        
+        System.out.println("\n--- Initial Balances ---");
+        System.out.println("Account 1 Balance: " + acc1.getBalance());
+        System.out.println("Account 2 Balance: " + acc2.getBalance());
+
+        
+        System.out.println("\n--- Withdrawal from Account 1 ---");
+        acc1.withdraw(100);
+
+        
+        System.out.println("\n--- Transfer from Account 1 to Account 2 ---");
+        acc1.transfer(acc2, 150);
+
+        
+        System.out.println("\n--- Final Balances ---");
+        System.out.println("Account 1 Balance: " + acc1.getBalance());
+        System.out.println("Account 2 Balance: " + acc2.getBalance());
+        System.out.println("Transferred Amount: " + acc1.getTransferredAmount());
+    }
+}
