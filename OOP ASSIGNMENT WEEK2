@@ -1,0 +1,64 @@
+import java.util.Scanner;
+
+
+class Employee {
+    
+    String name;
+    int socialSecurityNumber;
+    double wage;
+    int workingHours;
+
+    
+    Employee(String name, int ssn, double wage, int workingHours) {
+        this.name = name;
+        this.socialSecurityNumber = ssn;
+        this.wage = wage;
+        this.workingHours = workingHours;
+    }
+
+    
+    void displayInfo() {
+        System.out.println("Employee Name: " + name);
+        System.out.println("Social Security Number: " + socialSecurityNumber);
+    }
+
+    
+    void displaySalary() {
+        double salary = wage * workingHours;
+        System.out.println("Salary: $" + salary);
+    }
+}
+
+
+public class Main {
+    public static void main(String[] args) {
+        
+        Employee emp1 = new Employee("Ibrahimrashid", 2410213552, 25.5, 40);
+        System.out.println("\n--- Employee 1 Details ---");
+        emp1.displayInfo();
+        emp1.displaySalary();
+
+        
+        Scanner input = new Scanner(System.in);
+        System.out.println("\n--- Enter Employee 2 Details ---");
+        System.out.print("Enter employee name: ");
+        String name = input.nextLine();
+
+        System.out.print("Enter social security number: ");
+        int ssn = input.nextInt();
+
+        System.out.print("Enter wage per hour: ");
+        double wage = input.nextDouble();
+
+        System.out.print("Enter working hours: ");
+        int hours = input.nextInt();
+
+        
+        Employee emp2 = new Employee(name, ssn, wage, hours);
+        System.out.println("\n--- Employee 2 Details ---");
+        emp2.displayInfo();
+        emp2.displaySalary();
+
+        input.close();
+    }
+}
