@@ -1,0 +1,62 @@
+import java.util.InputMismatchException;
+import java.util.Scanner;
+
+public class Worker {
+    private double salary;
+    private String name;
+    private int count;
+
+    public Worker() {
+        count++;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setSalary(double salary) {
+        if (salary <= 0) {
+            throw new IllegalArgumentException("Illegal argument salary");
+        }
+        this.salary = salary;
+    }
+
+    public int getCount() {
+        return count;
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        try {
+            System.out.println("Enter an integer:");
+            int a = scanner.nextInt();
+            System.out.println("name: " + a);
+        } catch (InputMismatchException e) {
+            System.out.println("Enter an integer:");
+            scanner.nextLine();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        Worker worker = new Worker();
+        try {
+            System.out.println("Enter worker salary=");
+            double salaryInput = scanner.nextDouble();
+            worker.setSalary(salaryInput);
+        } catch (InputMismatchException e) {
+            System.out.println("please enter a valid salary");
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        Worker worker1 = new Worker();
+        Worker worker2 = new Worker();
+        Worker worker3 = new Worker();
+        Worker worker4 = new Worker();
+
+     
+        System.out.println("Total workers: " + worker4.getCount());
+    }
+}
